@@ -11,7 +11,7 @@
 
 如果想抓取最新新闻数据并构建索引，一键运行`./code/setup.py`，再按上面的方法测试。
 
-2020.4.5：新增抓取[中国新闻网](http://www.chinanews.com/scroll-news/news1.html)的爬虫程序。先运行`./code/spider.chinanews.com.py`爬取最近5天新闻（约2500条）；然后注释`./code/setup.py`[第38行](https://github.com/01joy/news-search-engine/blob/master/code/setup.py#L38)并运行，自动构建索引。
+2022.10.19：新增抓取[中国新闻网](http://www.chinanews.com/scroll-news/news1.html)的爬虫程序。先运行`./code/spider.chinanews.com.py`爬取最近5天新闻（约2500条）；然后注释`./code/setup.py`[第38行](https://github.com/01joy/news-search-engine/blob/master/code/setup.py#L38)并运行，自动构建索引。
 
 # 项目介绍
 1. [和我一起构建搜索引擎（一）简介](http://bitjoy.net/2016/01/04/introduction-to-building-a-search-engine-1/)
