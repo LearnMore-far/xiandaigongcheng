@@ -84,8 +84,12 @@ def find(docid, extra=False):
         url = root.find('url').text
         title = root.find('title').text
         if not extra:
-            for i in seg_list:
+            # 给标题加上高亮标签<i style='color:red'>key words</i>
+            # 高亮思想就是找到关键字然后用replace方法替换成高亮标签<i style='color:red'>key words</i>即可
+            for i in seg_list:  # 中国二十大 ['中国', '二十大']
                 title = title.replace(i, "<span style='color:red'>" + i + "</span>")
+            # from flask import Markup
+            # 必须用flask中的Markup函数将添加高亮的句子封装，不然render_template函数没办法渲染添加的标签
             title = Markup(title)
         if extra:
             body = root.find('body').text
