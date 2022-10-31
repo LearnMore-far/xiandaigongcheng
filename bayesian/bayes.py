@@ -82,7 +82,7 @@ def classifyNB(wordVec, p0Vec, p1Vec, p1_class):
 
 
 def classifyDoc():
-    trainMat, trainClass, testMat, testClass = createDatasetOnehot(path="D:\\ML\\code\\weibo_senti_200.csv", number=200)
+    trainMat, trainClass, testMat, testClass = createDatasetOnehot(path="data\\weibo_senti_200.csv", number=200)
     p0Vec, p1Vec, p1 = trainNB(trainMat.T, trainClass.reshape((trainClass.shape[1],)))
     predictions = []
     for docIndex in range(testMat.shape[1]):

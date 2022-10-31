@@ -12,7 +12,7 @@ from sklearn.feature_extraction.text import TfidfTransformer
 
 # 取5000条数据
 def write_file():
-    pd_all = pd.read_csv("D:\\ML\\code\\weibo_senti_100k.csv", nrows=80000)
+    pd_all = pd.read_csv("data\\weibo_senti_100k.csv", nrows=80000)
     sen = pd_all.values.tolist()
     label = []
     review = []
@@ -26,7 +26,7 @@ def write_file():
     # 字典中的key值即为csv中列名
     dataframe = pd.DataFrame({'label': label, 'review': review})
     # 将DataFrame存储为csv,index表示是否显示行名，default=True
-    dataframe.to_csv("D:\\ML\\code\\weibo_senti_test_200.csv", index=False, sep=',')
+    dataframe.to_csv("data\\weibo_senti_test_200.csv", index=False, sep=',')
 
 
 # 加载数据
@@ -67,7 +67,7 @@ def delete_stopwords(lines):
     :param lines: 代分词集合 (list)
     :return: 分词完成后的集合 (list) 以及 词频统计 (dict)
     """
-    stopwords = read_file("D:\\ML\\code\\stopwords.dat")
+    stopwords = read_file("data\\stopwords.dat")
     words = []
     all_words = []
     for line in lines:
@@ -96,7 +96,7 @@ def FeatureExtraction(corpus):
 
 
 # 构建数据集tfidf
-def createDataSet(path="D:\\ML\\code\\weibo_senti_200.csv", number=200):
+def createDataSet(path="data\\weibo_senti_200.csv", number=200):
     np.random.seed(1)  # 设置一个固定的随机种子，以保证接下来的步骤中我们的结果是一致的。
 
     label, reviews, pn, nn = load_data(path, number)
@@ -163,7 +163,7 @@ def setOfWord2Vec(vocablist, inputSet):
 
 
 # onehot编码
-def createDatasetOnehot(path="D:\\ML\\code\\weibo_senti_200.csv", number=200):
+def createDatasetOnehot(path="data\\weibo_senti_200.csv", number=200):
     np.random.seed(1)
     label, reviews, pn, nn = load_data(path, number)
     print("训练集积极评论样本数：", pn)
@@ -191,7 +191,7 @@ def createDatasetOnehot(path="D:\\ML\\code\\weibo_senti_200.csv", number=200):
     print("trainClass的维度为: " + str(trainClass.shape))
     print("训练数据集里面的数据有：" + str(trainClass.shape[1]) + " 个")
 
-    label_, reviews_, pn_, nn_ = load_data("D:\\ML\\code\\weibo_senti_test_200.csv", 240)
+    label_, reviews_, pn_, nn_ = load_data("data\\weibo_senti_test_200.csv", 240)
     print("测试集积极评论样本数：", pn_)
     print("测试集消极评论样本数：", nn_)
     doclist_ = delete_stopwords(reviews_)
