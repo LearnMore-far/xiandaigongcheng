@@ -1,19 +1,23 @@
-#-*- coding: utf_8 -*-
+# -*- coding: utf_8 -*-
 
 import json
 import sys, io
 import jieba
 import random
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='gb18030') #改变标准输出的默认编码
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='gb18030')  # 改变标准输出的默认编码
 
-trainFile = 'baike_qa2019/my_traindata.json'
-stopwordFile = 'stopword.txt'
-wordLabelFile = 'wordLabel.txt'
-trainDataVecFile = 'traindata_vec.txt'
+trainFile = r'data\my_train_data.json'
+validFile = r'data\my_valid_data.json'
+stopwordFile = r'data\stopword.txt'
+wordLabelFile = r'data\WordLabel.txt'
+trainDataVecFile = r'data\train_data_vec.txt'
+validDataVecFile = r'data\valid_data_vec.txt'
 maxLen = 20
 
-labelFile = 'label.txt'
+labelFile = r'data\label.txt'
+
+
 def read_labelFile(file):
     data = open(file, 'r', encoding='utf_8').read().split('\n')
     label_w2n = {}
@@ -41,8 +45,8 @@ def get_worddict(file):
     for line in datas:
         line = line.split(' ')
         word2ind[line[0]] = int(line[1])
-    
-    ind2word = {word2ind[w]:w for w in word2ind}
+
+    ind2word = {word2ind[w]: w for w in word2ind}
     return word2ind, ind2word
 
 
@@ -50,9 +54,9 @@ def json2txt():
     label_dict, label_n2w = read_labelFile(labelFile)
     word2ind, ind2word = get_worddict(wordLabelFile)
 
-    traindataTxt = open(trainDataVecFile, 'w')
+    traindataTxt = open(validDataVecFile, 'w')
     stoplist = read_stopword(stopwordFile)
-    datas = open(trainFile, 'r', encoding='utf_8').read().split('\n')
+    datas = open(validFile, 'r', encoding='utf_8').read().split('\n')
     datas = list(filter(None, datas))
     random.shuffle(datas)
     for line in datas:
@@ -66,7 +70,7 @@ def json2txt():
         for w in title_seg:
             if w in stoplist:
                 continue
-            title_ind.append(word2ind[w])
+            title_ind.append(word2ind.get(w, word2ind['<OOV>']))
         length = len(title_ind)
         if length > maxLen + 1:
             title_ind = title_ind[0:21]

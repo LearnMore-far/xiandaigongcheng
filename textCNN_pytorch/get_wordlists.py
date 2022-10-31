@@ -8,12 +8,11 @@
 
 import json
 import jieba
-from tqdm import tqdm
 
-trainFile = 'baike_qa2019/my_traindata.json'
-stopwordFile = 'stopword.txt'
-wordLabelFile = 'wordLabel.txt'
-lengthFile = 'length.txt'
+trainFile = r'data\my_train_data.json'
+stopwordFile = r'data\stopword.txt'
+wordLabelFile = r'data\WordLabel.txt'
+lengthFile = r'data\length.txt'
 
 
 def read_stopword(file):
@@ -23,7 +22,7 @@ def read_stopword(file):
 
 
 def main():
-    worddict = {}
+    worddict = {'<OOV>': 0}
     stoplist = read_stopword(stopwordFile)
     datas = open(trainFile, 'r', encoding='utf_8').read().split('\n')
     datas = list(filter(None, datas))
@@ -62,6 +61,7 @@ def main():
     for t in len_list:
         d = str(t[0]) + ' ' + str(t[1]) + '\n'
         f.write(d)
+
 
 if __name__ == "__main__":
     main()

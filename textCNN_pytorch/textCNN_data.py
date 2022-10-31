@@ -4,8 +4,8 @@ import random
 import numpy as np
 
 
-trainDataFile = 'traindata_vec.txt'
-valDataFile = 'valdata_vec.txt'
+trainDataFile = r'data\train_data_vec.txt'
+valDataFile = r'data\valid_data_vec.txt'
 
 
 def get_valdata(file=valDataFile):
@@ -34,7 +34,6 @@ class textCNN_data(Dataset):
         sentence = np.array(data[1:])
 
         return cla, sentence
-
 
 
 def textCNN_dataLoader(param):

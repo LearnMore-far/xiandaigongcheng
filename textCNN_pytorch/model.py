@@ -3,11 +3,12 @@ import torch.nn as nn
 from torch.nn import functional as F
 import math
 
+
 class textCNN(nn.Module):
     def __init__(self, param):
         super(textCNN, self).__init__()
         ci = 1  # input chanel size
-        kernel_num = param['kernel_num'] # output chanel size
+        kernel_num = param['kernel_num']  # output chanel size
         kernel_size = param['kernel_size']
         vocab_size = param['vocab_size']
         embed_dim = param['embed_dim']
